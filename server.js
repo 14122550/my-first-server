@@ -131,7 +131,7 @@ const server = http.createServer((req, res) => {
         
         <div class="bello">🍌 BELLO! 🍌</div>
         <h1>สวัสดีค่ะ Web Server ของ</h1>
-        <h2 style="color: #23508C; margin: 0 0 15px 0; font-size: 1.5rem;">นางสาวกนกนันท์ ภูมาลา (อุ้ม)</h2>
+        <h2 style="color: #23508C; margin: 0 0 15px 0; font-size: 1.5rem;">นางสาวชนกนันท์ ภู่มาลา (อุ้ม)</h2>
         
         <p class="info-text">รหัสนักศึกษา: <span class="highlight">69319010020</span></p>
         <p class="info-text">ระดับชั้น: <span class="highlight">HIT.1/1 (VB)</span></p>
