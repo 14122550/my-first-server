@@ -1,20 +1,20 @@
-// 1. เรียกใชงาน Module ที่ชื่อวา 'http' ซึ่งเปนระบบพื้นฐานของ Node.js สําหรับทําเซิรฟ เวอร
+// 1. เรียกใช้งาน Module ที่ชื่อว่า 'http' ซึ่งเป็นระบบพื้นฐานของ Node.js สำหรับทำเซิร์ฟเวอร์
 const http = require('http');
 
-// 2. กําหนดชองทาง (Port) ที่เซิรฟเวอรจะใชสื่อสาร โดยใหใชของที่ Cloud กําหนดมา(process.env.PORT) ถาไมมีใหใช 3000
+// 2. กำหนดช่องทาง (Port) ที่เซิร์ฟเวอร์จะใช้สื่อสาร โดยให้ใช้ของที่ Cloud กำหนดมา(process.env.PORT) ถ้าไม่มีให้ใช้ 3000
 const port = process.env.PORT || 3000;
 
-// 3. สรางเครื่องแมขาย (Server) ที่คอยรับคําขอ (req) และตอบกลับ (res)
+// 3. สร้างเครื่องแม่ข่าย (Server) ที่คอยรับคำขอ (req) และตอบกลับ (res)
 const server = http.createServer((req, res) => {
 
-// 3.1 ตั้งรหัสสถานะ 200 หมายถึง "ทํางานสําเร็จ (OK)"
-res.statusCode = 200;
+    // 3.1 ตั้งรหัสสถานะ 200 หมายถึง "ทำงานสำเร็จ (OK)"
+    res.statusCode = 200;
 
-// 3.2 บอกเบราวเซอรของผูใชวา สิ่งที่สงกลับไปคือไฟลขอความแบบ HTML และรองรับภาษาไทย (utf-8)
-res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    // 3.2 บอกเบราว์เซอร์ของผู้ใช้ว่า สิ่งที่ส่งกลับไปคือไฟล์ข้อความแบบ HTML และรองรับภาษาไทย (utf-8)
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
 
-// 3.3 สงขอมูลหนาเว็บกลับไปหาผูใช (*** ใหนักศึกษาแกชื่อ-นามสกุลตรงนี้ ***)
-res.end(`
+    // 3.3 ส่งข้อมูลหน้าเว็บกลับไปหาผู้ใช้
+    res.end(`
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -89,7 +89,17 @@ res.end(`
         h1 {
             color: #23508C;
             margin-top: 25px;
-            font-size: 2rem;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .info-text {
+            font-size: 1.1rem;
+            margin: 5px 0;
+            color: #555;
+        }
+        .highlight {
+            color: #E67E22;
+            font-weight: bold;
         }
         .status {
             background-color: #23508C;
@@ -98,8 +108,8 @@ res.end(`
             border-radius: 50px;
             display: inline-block;
             font-weight: bold;
-            font-size: 1.1rem;
-            margin-top: 15px;
+            font-size: 1rem;
+            margin-top: 20px;
             box-shadow: 0 4px 10px rgba(35, 80, 140, 0.3);
         }
         .bello {
@@ -121,18 +131,22 @@ res.end(`
         
         <div class="bello">🍌 BELLO! 🍌</div>
         <h1>สวัสดีค่ะ Web Server ของ</h1>
-        <h2 style="color: #E67E22; margin: 0;">นางสาวกนกนันท์ ภูมาลา 69319010020</h2>
+        <h2 style="color: #23508C; margin: 0 0 15px 0; font-size: 1.5rem;">นางสาวกนกนันท์ ภูมาลา (อุ้ม)</h2>
+        
+        <p class="info-text">รหัสนักศึกษา: <span class="highlight">69319010020</span></p>
+        <p class="info-text">ระดับชั้น: <span class="highlight">HIT.1/1 (VB)</span></p>
+        <p class="info-text">สาขา: <span class="highlight">เทคโนโลยีสารสนเทศ</span></p>
         
         <p class="status">🚀 เครื่องแม่ข่ายทำงานปกติบนระบบ Railway แล้วนะคะ!</p>
     </div>
 
 </body>
 </html>
-`);
+    `);
 
 });
 
-// 4. สั่งใหเซิรฟเวอรเริ่มตนเปดรับฟงการเชื่อมตอตาม Port ที่กําหนดไว
+// 4. สั่งให้เซิร์ฟเวอร์เริ่มต้นเปิดรับฟังการเชื่อมต่อตาม Port ที่กำหนดไว้
 server.listen(port, () => {
-console.log(`Server is running! เครื่องแม่ข่ายเปิดทำงานแล้วที่ช่องทาง: ${port}`);
+    console.log(`Server is running! เครื่องแม่ข่ายเปิดทำงานแล้วที่ช่องทาง: ${port}`);
 });
