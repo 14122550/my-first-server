@@ -56,7 +56,7 @@ function buildStudentsTable(rows) {
                     <tbody>`;
 
   for (const row of rows) {
-    const id = row.student_id ?? '-';
+    const id = row.students_id ?? '-';
     const name = row.student_name ?? '-';
     html += `
                         <tr style="background: ${rows.indexOf(row) % 2 === 0 ? '#f9f9f9' : 'white'};">
@@ -89,7 +89,7 @@ async function getStudents() {
   try {
     client = await pool.connect();
     const result = await client.query(
-      'SELECT student_id, student_name FROM students ORDER BY student_id'
+      'SELECT students_id, student_name FROM students ORDER BY students_id'
     );
     return { success: true, data: result.rows, error: null };
   } catch (err) {
@@ -110,7 +110,7 @@ async function addStudent(studentId, studentName) {
   try {
     client = await pool.connect();
     const result = await client.query(
-      'INSERT INTO students (student_id, student_name) VALUES ($1, $2) RETURNING *',
+      'INSERT INTO students (students_id, student_name) VALUES ($1, $2) RETURNING *',
       [studentId, studentName]
     );
     return { success: true, data: result.rows[0], error: null };
@@ -173,7 +173,7 @@ const server = http.createServer(async (req, res) => {
     req.on('end', async () => {
       try {
         const data = JSON.parse(body);
-        const result = await addStudent(data.student_id, data.student_name);
+        const result = await addStudent(data.students_id || data.student_id, data.student_name);
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
         res.statusCode = result.success ? 201 : 400;
         res.end(JSON.stringify(result));
@@ -316,7 +316,7 @@ const server = http.createServer(async (req, res) => {
 server.listen(port, () => {
   console.log(`
 ╔════════════════════════════════════════════════════════════╗
-║   🍌 Minion Web Server เปิดทำงานแล้ว                       ║
+║   🍌 Minion Web Server เปิดทำงานแล้ว                        ║
 ╠════════════════════════════════════════════════════════════╣
 ║   🌐 URL: http://localhost:${port}
 ║   📡 API: http://localhost:${port}/api/students
